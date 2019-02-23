@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import CalendarGrid from './CalendarGrid';
-import CalendarHeader from './CalendarHeader';
+import CalendarGrid from './CalendarGrid/CalendarGrid';
+import CalendarHeader from './CalendarHeader/CalendarHeader';
 import { Validation } from './Validation';
 import './Calendar.scss';
 

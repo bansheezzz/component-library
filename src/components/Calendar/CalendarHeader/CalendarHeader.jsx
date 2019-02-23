@@ -2,7 +2,7 @@ import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import { Validation } from './Validation';
+import { Validation } from '../Validation';
 
 import './CalendarHeader.scss';
 
