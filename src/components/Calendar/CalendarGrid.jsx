@@ -1,17 +1,10 @@
-import React, { Component } from 'react';
-import { Validation } from './Validation';
-
-import {
-  lastDayOfMonth,
-  getYear,
-  getMonth,
-  getDate,
-  startOfDay,
-  eachDay,
-  getDay,
-  isToday
-} from 'date-fns';
 import './CalendarGrid.scss';
+
+import { eachDay, getDay, getMonth, getYear, lastDayOfMonth, startOfDay } from 'date-fns';
+import React, { Component } from 'react';
+
+import CalendarGridCell from './CalendarGridCell';
+import { Validation } from './Validation';
 
 class CalendarGrid extends Component {
   static propTypes = {
@@ -26,13 +19,8 @@ class CalendarGrid extends Component {
     const dates = [
       ...Array.from(new Array(weekOffset), (d, i) => <div key={i} />),
       ...eachDay(firstDay, lastDay).map((d, i) => {
-        const className = isToday(d)
-          ? 'calendar-cell calendar-cell-today'
-          : 'calendar-cell';
         return (
-          <div className={className} key={i + weekOffset}>
-            {getDate(d)}
-          </div>
+          <CalendarGridCell date={d} key={i + weekOffset} />
         );
       })
     ];

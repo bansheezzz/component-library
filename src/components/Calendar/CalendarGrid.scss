@@ -2,14 +2,4 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   height: 100%;
-  div.calendar-cell {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  div.calendar-cell-today {
-    background: lightcyan;
-  }
 }

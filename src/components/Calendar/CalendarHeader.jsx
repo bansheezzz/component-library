@@ -17,9 +17,8 @@ class CalendarHeader extends Component {
   };
 
   render() {
-    const date = this.props.selectedDate;
-    const fmt = this.props.monthYearFormat;
-    return <div className="month-year">{`${format(date, fmt)}`}</div>
+    const {selectedDate, monthYearFormat} = {...this.props}
+    return <div className="month-year">{`${format(selectedDate, monthYearFormat)}`}</div>
   }
 }
 export default CalendarHeader

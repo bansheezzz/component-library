@@ -14,17 +14,17 @@ class Calendar extends Component {
 
   static defaultProps = {
     monthYearFormat: 'MMM, YYYY'
-  }
-
+  };
 
   render() {
-    const date = this.props.selectedDate;
+    const { selectedDate, height, width } = { ...this.props };
     return (
-      <div className="calendar">
-        <CalendarHeader
-          selectedDate={date}
-        />
-        <CalendarGrid selectedDate={date}/>
+      <div
+        className="calendar"
+        style={{ height: height || '300px', width: width || '400px' }}
+      >
+        <CalendarHeader selectedDate={selectedDate} />
+        <CalendarGrid selectedDate={selectedDate} />
       </div>
     );
   }
