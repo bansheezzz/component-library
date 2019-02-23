@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Calendar selectedDate={new Date()} useShortMonth={false} />
+        <Calendar selectedDate={new Date()} height="500px" width="700px" />
       </div>
     );
   }
