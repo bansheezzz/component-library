@@ -17,15 +17,7 @@ import React, { Component } from 'react';
 import CalendarGridCell from './CalendarGridCell/CalendarGridCell';
 import { Validation } from '../Validation';
 
-const WEEKDAYS = [
-  'Sun',
-  'Mon',
-  'Tue',
-  'Wed',
-  'Thu',
-  'Fri',
-  'Sat'
-]
+const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 class CalendarGrid extends Component {
   static propTypes = {
@@ -33,7 +25,13 @@ class CalendarGrid extends Component {
   };
 
   renderCell(date, isCurrent) {
-    return <CalendarGridCell date={date} key={date.toString()} isCurrent={isCurrent} />;
+    return (
+      <CalendarGridCell
+        date={date}
+        key={date.toString()}
+        isCurrent={isCurrent}
+      />
+    );
   }
 
   render() {
@@ -42,21 +40,37 @@ class CalendarGrid extends Component {
     const lastDayCurrent = lastDayOfMonth(date);
     const weekOffset = getDay(firstDayCurrent);
     const lastDayLast = lastDayOfMonth(subMonths(date, 1));
+    const lastDayWeek = lastDayOfWeek(lastDayCurrent);
 
+    const priorMonth = eachDay(
+      subDays(lastDayLast, weekOffset - 1 > 0 ? weekOffset : 0),
+      lastDayLast
+    ).map(d => this.renderCell(d, false));
+    const nextMonth =
+      getDay(lastDayWeek) < WEEKDAYS.length - 1
+        ? eachDay(
+            addDays(lastDayCurrent, 1),
+            lastDayOfWeek(lastDayCurrent)
+          ).map(d => this.renderCell(d, false))
+        : [];
     const dates = [
-      ...eachDay(subDays(lastDayLast, weekOffset - 1), lastDayLast).map(d =>
-        this.renderCell(d, false)
+      ...priorMonth,
+      ...eachDay(firstDayCurrent, lastDayCurrent).map(d =>
+        this.renderCell(d, true)
       ),
-      ...eachDay(firstDayCurrent, lastDayCurrent).map(d => this.renderCell(d, true)),
-      ...eachDay(addDays(lastDayCurrent, 1), lastDayOfWeek(lastDayCurrent)).map(d => this.renderCell(d, false))
+      ...nextMonth
     ];
 
     return (
       <div className="calendar-grid">
-        <div className="week">{WEEKDAYS.map((w, i) => <div key={i}>{w}</div>)}</div>
+        <div className="week">
+          {WEEKDAYS.map((w, i) => (
+            <div key={i}>{w}</div>
+          ))}
+        </div>
         <div className="dates">{dates}</div>
       </div>
-    )
+    );
   }
 }
 export default CalendarGrid;
