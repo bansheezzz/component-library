@@ -42,16 +42,17 @@ class CalendarGrid extends Component {
     const lastDayLast = lastDayOfMonth(subMonths(date, 1));
     const lastDayWeek = lastDayOfWeek(lastDayCurrent);
 
-    const priorMonth = eachDay(
-      subDays(lastDayLast, weekOffset - 1 > 0 ? weekOffset : 0),
-      lastDayLast
-    ).map(d => this.renderCell(d, false));
+    const priorMonth =
+      weekOffset > 0
+        ? eachDay(subDays(lastDayLast, weekOffset - 1), lastDayLast).map(d =>
+            this.renderCell(d, false)
+          )
+        : [];
     const nextMonth =
-      getDay(lastDayWeek) < WEEKDAYS.length - 1
-        ? eachDay(
-            addDays(lastDayCurrent, 1),
-            lastDayOfWeek(lastDayCurrent)
-          ).map(d => this.renderCell(d, false))
+      getDay(lastDayCurrent) < WEEKDAYS.length - 1
+        ? eachDay(addDays(lastDayCurrent, 1), lastDayWeek).map(d =>
+            this.renderCell(d, false)
+          )
         : [];
     const dates = [
       ...priorMonth,
