@@ -3,6 +3,7 @@
   width: 25px;
   border-radius: 50px;
   transition: all .2s ease-in;
+  user-select: none;
   &:hover {
     background-color: #ddd;
     cursor: pointer;
