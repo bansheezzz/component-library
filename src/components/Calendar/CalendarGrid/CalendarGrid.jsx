@@ -17,13 +17,23 @@ import React, { Component } from 'react';
 import CalendarGridCell from './CalendarGridCell/CalendarGridCell';
 import { Validation } from '../Validation';
 
+const WEEKDAYS = [
+  'Sun',
+  'Mon',
+  'Tue',
+  'Wed',
+  'Thu',
+  'Fri',
+  'Sat'
+]
+
 class CalendarGrid extends Component {
   static propTypes = {
     selectedDate: Validation.validateDate
   };
 
   renderCell(date, isCurrent) {
-    return <CalendarGridCell date={date} key={date.toString} isCurrent={isCurrent} />;
+    return <CalendarGridCell date={date} key={date.toString()} isCurrent={isCurrent} />;
   }
 
   render() {
@@ -41,7 +51,12 @@ class CalendarGrid extends Component {
       ...eachDay(addDays(lastDayCurrent, 1), lastDayOfWeek(lastDayCurrent)).map(d => this.renderCell(d, false))
     ];
 
-    return <div className="calendar-grid">{dates}</div>;
+    return (
+      <div className="calendar-grid">
+        <div className="week">{WEEKDAYS.map((w, i) => <div key={i}>{w}</div>)}</div>
+        <div className="dates">{dates}</div>
+      </div>
+    )
   }
 }
 export default CalendarGrid;

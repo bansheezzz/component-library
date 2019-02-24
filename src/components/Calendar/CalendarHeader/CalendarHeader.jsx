@@ -9,11 +9,7 @@ import './CalendarHeader.scss';
 class CalendarHeader extends Component {
   static propTypes = {
     selectedDate: Validation.validateDate,
-    monthYearFormat: PropTypes.string
-  };
-
-  static defaultProps = {
-    monthYearFormat: 'MMM, YYYY'
+    monthYearFormat: PropTypes.string.isRequired
   };
 
   render() {

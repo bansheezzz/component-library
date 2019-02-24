@@ -19,7 +19,7 @@ class CalendarGridCell extends Component {
     const className = isToday(date) ? 'today' : '';
     return (
       <div className="calendar-cell" key={key}>
-        <div className={className} style={{color: isCurrent ? 'black' : 'lightgray'}}>{getDate(date)}</div>
+        <div className={className} style={{color: isCurrent ? 'black' : '#ddd'}}>{getDate(date)}</div>
       </div>
     );
   }
