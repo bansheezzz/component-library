@@ -1,12 +1,22 @@
+import './Calendar.scss';
+
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import CalendarGrid from './CalendarGrid/CalendarGrid';
 import CalendarHeader from './CalendarHeader/CalendarHeader';
 import { Validation } from './Validation';
-import './Calendar.scss';
+import addMonths from 'date-fns/add_months';
+import subMonths from 'date-fns/sub_months';
 
 class Calendar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedDate: this.props.selectedDate
+    }
+  }
+
   static propTypes = {
     selectedDate: Validation.validateDate,
     monthYearFormat: PropTypes.string
@@ -16,15 +26,34 @@ class Calendar extends Component {
     monthYearFormat: 'MMMM YYYY'
   };
 
+  previousMonthHandler = () => {
+    const date = this.state.selectedDate;
+    this.setState({
+      selectedDate: subMonths(date, 1)
+    });
+  }
+
+  nextMonthHandler = () => {
+    const date = this.state.selectedDate;
+    this.setState({
+      selectedDate: addMonths(date, 1)
+    });
+  }
+
   render() {
-    const { selectedDate, monthYearFormat, height, width } = { ...this.props };
+    const { monthYearFormat, height, width } = { ...this.props };
     return (
       <div
         className="calendar"
         style={{ height: height || '300px', width: width || '400px' }}
       >
-        <CalendarHeader selectedDate={selectedDate} monthYearFormat={monthYearFormat} />
-        <CalendarGrid selectedDate={selectedDate} />
+        <CalendarHeader
+          selectedDate={this.state.selectedDate}
+          monthYearFormat={monthYearFormat}
+          previousMonth={this.previousMonthHandler}
+          nextMonth={this.nextMonthHandler}
+        />
+        <CalendarGrid selectedDate={this.state.selectedDate} />
       </div>
     );
   }
