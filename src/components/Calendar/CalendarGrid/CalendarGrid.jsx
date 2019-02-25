@@ -24,7 +24,15 @@ class CalendarGrid extends Component {
     selectedDate: Validation.validateDate
   };
 
-  renderCell(date, isCurrent) {
+  renderWeekdayHeader = () => {
+    return (
+      WEEKDAYS.map((w, i) => (
+        <div key={i}>{w}</div>
+      ))
+    );
+  }
+
+  renderDateCell = (date, isCurrent) => {
     return (
       <CalendarGridCell
         date={date}
@@ -45,19 +53,19 @@ class CalendarGrid extends Component {
     const priorMonth =
       weekOffset > 0
         ? eachDay(subDays(lastDayLast, weekOffset - 1), lastDayLast).map(d =>
-            this.renderCell(d, false)
+            this.renderDateCell(d, false)
           )
         : [];
     const nextMonth =
       getDay(lastDayCurrent) < WEEKDAYS.length - 1
         ? eachDay(addDays(lastDayCurrent, 1), lastDayWeek).map(d =>
-            this.renderCell(d, false)
+            this.renderDateCell(d, false)
           )
         : [];
     const dates = [
       ...priorMonth,
       ...eachDay(firstDayCurrent, lastDayCurrent).map(d =>
-        this.renderCell(d, true)
+        this.renderDateCell(d, true)
       ),
       ...nextMonth
     ];
@@ -65,9 +73,7 @@ class CalendarGrid extends Component {
     return (
       <div className="calendar-grid">
         <div className="week">
-          {WEEKDAYS.map((w, i) => (
-            <div key={i}>{w}</div>
-          ))}
+          {this.renderWeekdayHeader()}
         </div>
         <div className="dates">{dates}</div>
       </div>
