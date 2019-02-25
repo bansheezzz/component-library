@@ -8,6 +8,7 @@ import CalendarHeader from './CalendarHeader/CalendarHeader';
 import { Validation } from './Validation';
 import addMonths from 'date-fns/add_months';
 import subMonths from 'date-fns/sub_months';
+import startOfDay from 'date-fns/start_of_day';
 
 class Calendar extends Component {
   constructor(props) {
@@ -40,6 +41,12 @@ class Calendar extends Component {
     });
   }
 
+  setTodayHandler = () => {
+    this.setState({
+      selectedDate: startOfDay(new Date())
+    })
+  }
+
   render() {
     const { monthYearFormat, height, width } = { ...this.props };
     return (
@@ -52,6 +59,7 @@ class Calendar extends Component {
           monthYearFormat={monthYearFormat}
           previousMonth={this.previousMonthHandler}
           nextMonth={this.nextMonthHandler}
+          setToday={this.setTodayHandler}
         />
         <CalendarGrid selectedDate={this.state.selectedDate} />
       </div>

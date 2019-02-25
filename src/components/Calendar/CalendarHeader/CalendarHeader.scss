@@ -1,14 +1,16 @@
 .header {
-  display: grid;
-  grid-template-columns: 50px 1fr;
+  display: flex;
   align-items: center;
   height: 100%;
   .buttons,
   .month-year {
     display: flex;
-    font-weight: bold;
+    div:not(:first-child) {
+      margin-left: 10px;
+    }
   }
   .month-year {
+    font-size: 1.4em;
     margin-left: 10px;
   }
 }
