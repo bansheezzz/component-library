@@ -18,7 +18,6 @@ class CalendarGridCell extends Component {
     const { date, key, isCurrent } = { ...this.props };
     const className =
       (isCurrent ? 'current-month' : '') + (isToday(date) ? ' today' : '');
-    console.log(className);
     return (
       <div className="calendar-cell" key={key}>
         <div className={className}>{getDate(date)}</div>
