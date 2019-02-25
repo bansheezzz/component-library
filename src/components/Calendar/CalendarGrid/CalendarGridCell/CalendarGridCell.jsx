@@ -16,10 +16,12 @@ class CalendarGridCell extends Component {
 
   render() {
     const { date, key, isCurrent } = { ...this.props };
-    const className = isToday(date) ? 'today' : '';
+    const className =
+      (isCurrent ? 'current-month' : '') + (isToday(date) ? ' today' : '');
+    console.log(className);
     return (
       <div className="calendar-cell" key={key}>
-        <div className={className} style={{color: isCurrent ? 'black' : '#ddd'}}>{getDate(date)}</div>
+        <div className={className}>{getDate(date)}</div>
       </div>
     );
   }
