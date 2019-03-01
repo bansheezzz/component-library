@@ -58,7 +58,7 @@ const CalendarGrid = props => {
   ];
 
   return (
-    <div className="calendar-grid">
+    <div className="CalendarGrid">
       <div className="week">{renderWeekdayHeader()}</div>
       <div className="dates">{dates}</div>
     </div>

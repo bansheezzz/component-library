@@ -13,7 +13,7 @@ const CalendarGridCell = props => {
     isToday(date) ? 'today' : ''
   }`;
   return (
-    <div className="calendar-cell">
+    <div className="CalendarGridCell">
       <div className={dateClass}>{getDate(date)}</div>
     </div>
   );

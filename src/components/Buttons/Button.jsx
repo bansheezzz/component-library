@@ -5,7 +5,7 @@ import './Button.scss';
 
 const Button = (props) => {
   const {children, onClick, buttonStyle} = {...props};
-  const className = 'button ' + getButtonStyle(buttonStyle);
+  const className = `Button ${ getButtonStyle(buttonStyle)}`;
   return <div className={className} onClick={onClick}>{children}</div>;
 }
 

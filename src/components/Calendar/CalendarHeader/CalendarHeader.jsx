@@ -16,7 +16,7 @@ const CalendarHeader = (props) => {
     setToday
   } = { ...props };
   return (
-    <div className="header">
+    <div className="CalendarHeader">
       <div className="buttons">
         <Button buttonStyle="flat" onClick={setToday}>
           Today

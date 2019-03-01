@@ -51,7 +51,7 @@ class Calendar extends Component {
     const { monthYearFormat, height, width } = { ...this.props };
     return (
       <div
-        className="calendar"
+        className="Calendar"
         style={{ height: height || '300px', width: width || '400px' }}
       >
         <CalendarHeader
