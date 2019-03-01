@@ -3,26 +3,25 @@ import './CalendarGridCell.scss';
 import getDate from 'date-fns/get_date';
 import isToday from 'date-fns/is_today';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 
 import { Validation } from '../../Validation';
 
-class CalendarGridCell extends Component {
-  static propType = {
-    key: PropTypes.any,
-    date: Validation.validateDate,
-    isCurrent: PropTypes.bool.isRequired
-  };
+const CalendarGridCell = props => {
+  const { date, isCurrent } = { ...props };
+  const dateClass = `${isCurrent ? 'current-month' : ''} ${
+    isToday(date) ? 'today' : ''
+  }`;
+  return (
+    <div className="calendar-cell">
+      <div className={dateClass}>{getDate(date)}</div>
+    </div>
+  );
+};
 
-  render() {
-    const { date, key, isCurrent } = { ...this.props };
-    const className =
-      (isCurrent ? 'current-month' : '') + (isToday(date) ? ' today' : '');
-    return (
-      <div className="calendar-cell" key={key}>
-        <div className={className}>{getDate(date)}</div>
-      </div>
-    );
-  }
-}
+CalendarGridCell.propTypes = {
+  date: Validation.validateDate,
+  isCurrent: PropTypes.bool.isRequired
+};
+
 export default CalendarGridCell;
