@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
 import './App.scss';
+
+import React, { Component } from 'react';
+
 import Calendar from './components/Calendar/Calendar';
 
 class App extends Component {
