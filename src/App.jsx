@@ -2,7 +2,7 @@ import './App.scss';
 
 import React, { Component } from 'react';
 
-import Calendar from './components/Calendar/Calendar';
+import Calendar from './components/Calendar';
 
 class App extends Component {
   render() {

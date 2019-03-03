@@ -1,5 +1,3 @@
-import './CalendarGrid.scss';
-
 import {
   addDays,
   eachDay,
@@ -15,10 +13,31 @@ import {
 import React, { Component } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-import { Validation } from '../Validation';
-import CalendarGridCell from './CalendarGridCell/CalendarGridCell';
+import { Validation } from '../utilities/Validation';
+import CalendarGridCell from './CalendarGridCell';
+import styled from 'styled-components';
 
 const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+const Grid = styled.div`
+  height: 100%;
+  display: grid;
+  grid-template-rows: 30px 1fr;
+`;
+
+const Cells = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+`;
+
+const TopRow = styled(Cells)`
+  border-top: 1px solid #eee;
+`;
+
+const Weekday = styled.div`
+  border-left: 1px solid #eee;
+  text-align: center;
+`;
 
 class CalendarGrid extends Component {
   static propTypes = {
@@ -35,8 +54,8 @@ class CalendarGrid extends Component {
     );
   }
 
-  renderWeekdayHeader() {
-    return WEEKDAYS.map((w, i) => <div key={i}>{w}</div>);
+  renderWeekdays() {
+    return WEEKDAYS.map((w, i) => <Weekday key={i}>{w}</Weekday>);
   }
 
   constructor(props) {
@@ -45,7 +64,7 @@ class CalendarGrid extends Component {
       visible: true
     };
     this.renderDateCell = this.renderDateCell.bind(this);
-    this.renderWeekdayHeader = this.renderWeekdayHeader.bind(this);
+    this.renderWeekdays = this.renderWeekdays.bind(this);
     this.setVisible = this.setVisible.bind(this);
   }
 
@@ -94,12 +113,12 @@ class CalendarGrid extends Component {
     ];
 
     const calendarGrid = visible ? (
-      <div className="CalendarGrid">
-        <div className="week">{this.renderWeekdayHeader()}</div>
-        <div className="dates">{dates}</div>
-      </div>
+      <Grid>
+        <TopRow>{this.renderWeekdays()}</TopRow>
+        <Cells>{dates}</Cells>
+      </Grid>
     ) : (
-      <div />
+      <Grid />
     );
     return (
       <CSSTransition
