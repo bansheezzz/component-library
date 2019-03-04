@@ -10,7 +10,6 @@ import addMonths from 'date-fns/add_months';
 import subMonths from 'date-fns/sub_months';
 import startOfDay from 'date-fns/start_of_day';
 import isSameMonth from 'date-fns/is_same_month';
-
 import styled from 'styled-components';
 
 const CalendarContainer = styled.div`
